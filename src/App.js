@@ -1,11 +1,16 @@
-
+import React from "react";
 import "./App.css";
-import Home from "./components/Home";
+import Navbar from "./@common/Navbar";
+import Router from "./routes/Router";
 
 function App() {
+  const [path, setPath] = React.useState(window.location.pathname);
+
   return (
     <div className="App">
-      <Home />
+      <Navbar />
+
+      <Router pathname={path} />
     </div>
   );
 }

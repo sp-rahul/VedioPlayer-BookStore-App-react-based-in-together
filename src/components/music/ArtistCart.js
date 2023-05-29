@@ -1,5 +1,5 @@
 import React from "react";
-import { truncate } from "./Home";
+
 
 export default function ArtistCart({
   artist,
@@ -24,7 +24,7 @@ export default function ArtistCart({
         value={artist?.resource_url}
         onChange={handleCheckbox(artist?.resource_url)}
       />
-      <label htmlFor={ artist?.resource_url}>{truncate(artist?.title) }</label>
+      <label htmlFor={artist?.resource_url}>{artist?.title}</label>
     </div>
   );
 }

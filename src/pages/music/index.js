@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
-
-import ArtistCart from "./ArtistCart";
-import VedioList from "./VedioList";
-import VedioPlayer from "./VedioPlayer";
+import VedioPlayer from "../../components/music/VedioPlayer";
+import ArtistCart from "../../components/music/ArtistCart";
+import VedioList from "../../components/music/VedioList";
 
 export function truncate(str) {
   return str.length > 22 ? str.substring(0, 20) + ".." : str;
 }
 
-export default function Home() {
+export default function Music() {
   let [all_Music, setAll_Music] = useState([]);
 
   let [selectedArtist, setSelectedArtist] = useState({});
@@ -26,36 +25,8 @@ export default function Home() {
 
   return (
     <>
-      <div class="navbar-wrapper">
-      
-          <div class="navbar navbar-static-top" role="navigation">
-            <div class="container full-width">
-              <div class="navbar-header">
-                <a class="navbar-brand" href="#"></a>
-              </div>
-              <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav navbar-right">
-                  <li class="active">
-                    <a href="#home_page">Home</a>
-                  </li>
-                  <li>
-                    <a href="#about_page">About</a>
-                  </li>
-                  <li>
-                    <a href="#vedio_page">Vedio</a>
-                  </li>
-                  <li>
-                    <a href="#Link">Link</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      
-
       <div className="container">
-        <div className="common artist">
+        <div className="common">
           {all_Music?.map((artist, index) => (
             <ArtistCart
               // key={`${artist.id}${index}`}
