@@ -4,6 +4,7 @@ import "./style.css";
 import Author from "../../components/book/Author";
 import Books from "../../components/book/Books";
 import Cart from "../../components/book/Cart";
+import Loader from "../../@common/Loader";
 
 export function removeSpecialJoin(str) {
   return str
@@ -18,12 +19,19 @@ export default function Book() {
   const [cartItem, setCartItem] = React.useState({});
   const [selectedAuthor, setSelectedAuthor] = React.useState({});
 
+  const [isLoader, setIsLoader] = React.useState(false);
+
   React.useEffect(() => {
+    console.log("hitted");
+    setIsLoader(true);
+
     fetch("https://gutendex.com/books/")
       .then((response) => response.json())
       .then((res) => {
         setAllBooks(res.results);
         setBooks(res.results);
+
+        setIsLoader(false)
       });
   }, []);
 
@@ -47,15 +55,14 @@ export default function Book() {
     }
   }, [selectedAuthor]);
 
+  if (isLoader) {
+    return <p>
+      <Loader/>
+    </p>;
+  }
+
   return (
-    <div>
-      <div className="topnav">
-        {/* <img
-          src={Logo}
-          style={{ height: "50px", width: "100px" }}
-          alt="React Image"
-        /> */}
-      </div>
+    
       <div className="container">
         <Author
           data={allBooks}
@@ -65,6 +72,6 @@ export default function Book() {
         <Books data={books} cartItem={cartItem} setCartItem={setCartItem} />
         <Cart cartItem={cartItem} setCartItem={setCartItem} />
       </div>
-    </div>
+    
   );
 }

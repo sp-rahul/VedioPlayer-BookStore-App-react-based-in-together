@@ -3,7 +3,7 @@ import React from "react";
 export function truncate(str) {
   return str.length > 35 ? str.substring(0, 32) + ".." : str;
 }
-export default function VedioListCart({ element, url, setUrl }) {
+export default function VedioListCart({ element, setSelectedVideo }) {
   const time = new Date(element?.duration * 1000).toISOString().slice(14, 19);
   let thamnel =
     element?.uri.replace(
@@ -12,9 +12,11 @@ export default function VedioListCart({ element, url, setUrl }) {
     ) + "/default.jpg";
 
   const handleVedio = (val) => (e) => {
-    setUrl(val);
+    setSelectedVideo((pre) => {
+      return { isLoading: true, url: val };
+    });
   };
-  let tittle = truncate(element?.title)
+  let tittle = truncate(element?.title);
 
   return (
     <div className="playlist-cart">
@@ -30,10 +32,8 @@ export default function VedioListCart({ element, url, setUrl }) {
           <span className="thumnail-time"> {time}</span>
         </button>
       </div>
-      <div >
-      
-          <p>{tittle}</p>
-        
+      <div>
+        <p>{tittle}</p>
       </div>
     </div>
   );

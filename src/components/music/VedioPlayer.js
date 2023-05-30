@@ -1,10 +1,27 @@
 import React from "react";
 
-export default function VedioPlayer({ url }) {
-   let  data = url.replace("watch?v=","embed/");
+import Loader from "../../@common/Loader";
+
+export default function VedioPlayer({ selectedVideo, setSelectedVideo  }) {
+  let data = selectedVideo.url.replace("watch?v=", "embed/");
+  function handleLoad(event) {
+    console.log("event", event);
+    setSelectedVideo((pre)=>{
+      return {...pre, isLoading: false}
+    });
+  }
+  
   return (
-    <div  className="youtube" >
-        <iframe  frameBorder="0" src={data}></iframe>
+    <div className="youtube">
+   
+      <div class="iframe-loading">
+        {selectedVideo.isLoading && <Loader />}
+        <iframe
+          frameBorder="0"
+          src={data}
+          onLoad={handleLoad}
+        ></iframe>
+      </div>
     </div>
   );
 }
